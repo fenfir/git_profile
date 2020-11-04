@@ -1,4 +1,18 @@
 # git_profile
+## Create a config file (~/.gitprofiles.yaml)
+
+```
+profiles:
+  - name: profile1
+    user: John Doe
+    email: john.doe@example.com
+    sshCommand: ssh -i ~/.ssh/id_rsa_profile1
+  - name: profile2
+    user: Max Musterman
+    email: max.musterman@example.com
+    sshCommand: ssh -i ~/.ssh/id_rsa_profile2
+
+```
 
 ## Adding to your prompt
 
