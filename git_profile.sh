@@ -1,14 +1,13 @@
 #!/bin/bash
-CURRENT_PROFILE=""
-GLOBAL_PROFILE=""
+GIT_PROFILE_CURRENT_PROFILE=""
 
 function add_profile() {
     echo ""
 }
 
 function _git_profile_is_repo_profile() {
-    GLOBAL_PROFILE=$(_git_profile_get_global_profile)
-    REPO_PROFILE=$(_git_profile_get_repo_profile)
+    GIT_PROFILE_GLOBAL_PROFILE=$(_git_profile_get_global_profile)
+    GIT_PROFILE_REPO_PROFILE=$(_git_profile_get_repo_profile)
 
     if [ ! -z "$REPO_PROFILE" ]; then
         echo 1
@@ -18,13 +17,13 @@ function _git_profile_is_repo_profile() {
 }
 
 function _git_profile_get_current_profile() {
-    GLOBAL_PROFILE=$(_git_profile_get_global_profile)
-    REPO_PROFILE=$(_git_profile_get_repo_profile)
+    GIT_PROFILE_GLOBAL_PROFILE=$(_git_profile_get_global_profile)
+    GIT_PROFILE_REPO_PROFILE=$(_git_profile_get_repo_profile)
 
-    if [ ! -z "$REPO_PROFILE" ]; then
-        echo $REPO_PROFILE
+    if [ ! -z "$GIT_PROFILE_REPO_PROFILE" ]; then
+        echo $GIT_PROFILE_REPO_PROFILE
     else
-        echo $GLOBAL_PROFILE
+        echo $GIT_PROFILE_GLOBAL_PROFILE
     fi
 }
 
@@ -58,19 +57,19 @@ function _git_profile_activate_profile() {
     sshCommand=$(yq r ~/.gitprofiles.yaml 'profiles(name=='$name')'.sshCommand)
 
     if [ $(_git_profile_is_repo_profile) -eq 1 ]; then
-        git config user.name $user
-        git config user.email $email
-        git config core.sshCommand $sshCommand
+        git config user.name "$user"
+        git config user.email "$email"
+        git config core.sshCommand "$sshCommand"
     else 
-        git config --global user.name $user
-        git config --global user.email $email
-        git config --global core.sshCommand $sshCommand
+        git config --global user.name "$user"
+        git config --global user.email "$email"
+        git config --global core.sshCommand "$sshCommand"
     fi
 }
 
 function git_profile() {
-   CURRENT_PROFILE=$(_git_profile_get_current_profile)
+   GIT_PROFILE_CURRENT_PROFILE=$(_git_profile_get_current_profile)
 
-   echo $CURRENT_PROFILE
+   echo $GIT_PROFILE_CURRENT_PROFILE
 }
 
