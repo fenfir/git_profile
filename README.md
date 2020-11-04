@@ -14,6 +14,15 @@ profiles:
 
 ```
 
+## Setting the profiles
+```
+git_profile_set_global_profile profile1
+```
+
+```
+git_profile_set_repo_profile profile1
+```
+
 ## Adding to your prompt
 
 Source the git_profile.sh file in your .bashrc
